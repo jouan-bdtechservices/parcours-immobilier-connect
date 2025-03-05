@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const MainHero = () => {
   return (
@@ -14,12 +15,16 @@ export const MainHero = () => {
             L'immobilier clé en main : simplifiez vos démarches d'achat et de vente grâce à notre réseau de professionnels qualifiés.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button size="lg" className="px-8">
-              Je suis un particulier
-              <ArrowRight className="ml-2 h-4 w-4" />
+            <Button size="lg" className="px-8" asChild>
+              <Link to="/journey">
+                Je suis un particulier
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
-            <Button size="lg" variant="outline">
-              Je suis un professionnel
+            <Button size="lg" variant="outline" asChild>
+              <Link to="/professional-dashboard">
+                Je suis un professionnel
+              </Link>
             </Button>
           </div>
         </div>
