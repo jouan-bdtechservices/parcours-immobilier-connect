@@ -6,6 +6,7 @@ import { LeadTable } from "@/components/LeadTable";
 import { ProfessionalHeader } from "@/components/ProfessionalHeader";
 import { ConversationTemplate } from "@/components/ConversationTemplate";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { BarChart, FileText, Users, Calendar, MessageCircle } from "lucide-react";
 
 const ProfessionalDashboard = () => {

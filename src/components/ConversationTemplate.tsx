@@ -29,7 +29,7 @@ export const ConversationTemplate = () => {
     if (inputValue.trim() === "") return;
 
     // Add user message
-    const newUserMessage = {
+    const newUserMessage: Message = {
       id: messages.length + 1,
       text: inputValue,
       sender: "user",
@@ -41,7 +41,7 @@ export const ConversationTemplate = () => {
     
     // Simulate bot response
     setTimeout(() => {
-      const botResponse = {
+      const botResponse: Message = {
         id: messages.length + 2,
         text: "Merci pour votre message. Je suis en train de traiter votre demande.",
         sender: "bot",
