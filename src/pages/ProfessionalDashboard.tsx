@@ -4,12 +4,14 @@ import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LeadTable } from "@/components/LeadTable";
 import { ProfessionalHeader } from "@/components/ProfessionalHeader";
+import { ConversationTemplate } from "@/components/ConversationTemplate";
 import { Card, CardContent } from "@/components/ui/card";
-import { BarChart, FileText, Users, Calendar } from "lucide-react";
+import { BarChart, FileText, Users, Calendar, MessageCircle } from "lucide-react";
 
 const ProfessionalDashboard = () => {
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("new-leads");
+  const [showConversation, setShowConversation] = useState(false);
   
   const stats = [
     { label: "Leads", value: "24", icon: Users, color: "bg-emerald-500" },
@@ -42,24 +44,58 @@ const ProfessionalDashboard = () => {
           ))}
         </div>
       
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-6">
-          <h2 className="text-xl font-bold mb-4">Activité récente</h2>
-          <div className="space-y-3">
-            <div className="flex items-center text-sm p-2 hover:bg-slate-50 dark:hover:bg-gray-700 rounded-md">
-              <div className="w-2 h-2 rounded-full bg-emerald-500 mr-3"></div>
-              <span className="flex-1">Jean Dupont a confirmé un rendez-vous</span>
-              <span className="text-muted-foreground">Il y a 2h</span>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+          <div className="lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 className="text-xl font-bold mb-4">Activité récente</h2>
+            <div className="space-y-3">
+              <div className="flex items-center text-sm p-2 hover:bg-slate-50 dark:hover:bg-gray-700 rounded-md">
+                <div className="w-2 h-2 rounded-full bg-emerald-500 mr-3"></div>
+                <span className="flex-1">Jean Dupont a confirmé un rendez-vous</span>
+                <span className="text-muted-foreground">Il y a 2h</span>
+              </div>
+              <div className="flex items-center text-sm p-2 hover:bg-slate-50 dark:hover:bg-gray-700 rounded-md">
+                <div className="w-2 h-2 rounded-full bg-blue-500 mr-3"></div>
+                <span className="flex-1">Nouveau lead: Marie Martin (Achat)</span>
+                <span className="text-muted-foreground">Il y a 3h</span>
+              </div>
+              <div className="flex items-center text-sm p-2 hover:bg-slate-50 dark:hover:bg-gray-700 rounded-md">
+                <div className="w-2 h-2 rounded-full bg-amber-500 mr-3"></div>
+                <span className="flex-1">Contrat signé avec Pierre Durand</span>
+                <span className="text-muted-foreground">Hier</span>
+              </div>
             </div>
-            <div className="flex items-center text-sm p-2 hover:bg-slate-50 dark:hover:bg-gray-700 rounded-md">
-              <div className="w-2 h-2 rounded-full bg-blue-500 mr-3"></div>
-              <span className="flex-1">Nouveau lead: Marie Martin (Achat)</span>
-              <span className="text-muted-foreground">Il y a 3h</span>
+          </div>
+          
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-bold">Assistant IA</h2>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="flex items-center gap-1"
+                onClick={() => setShowConversation(!showConversation)}
+              >
+                <MessageCircle className="w-4 h-4" />
+                {showConversation ? "Réduire" : "Ouvrir"}
+              </Button>
             </div>
-            <div className="flex items-center text-sm p-2 hover:bg-slate-50 dark:hover:bg-gray-700 rounded-md">
-              <div className="w-2 h-2 rounded-full bg-amber-500 mr-3"></div>
-              <span className="flex-1">Contrat signé avec Pierre Durand</span>
-              <span className="text-muted-foreground">Hier</span>
-            </div>
+            {showConversation ? (
+              <ConversationTemplate />
+            ) : (
+              <div className="text-center p-6 border border-dashed rounded-lg">
+                <MessageCircle className="w-12 h-12 mx-auto text-muted-foreground mb-2" />
+                <p className="text-muted-foreground">
+                  Utilisez notre assistant IA pour vous aider à gérer vos leads et répondre à vos questions.
+                </p>
+                <Button 
+                  variant="default" 
+                  className="mt-4"
+                  onClick={() => setShowConversation(true)}
+                >
+                  Démarrer une conversation
+                </Button>
+              </div>
+            )}
           </div>
         </div>
         
